@@ -29,7 +29,7 @@ function renderJSON(radar_JSON)
         for(var circleNo=0; circleNo < 912; circleNo++)
         {
 
-            pointsArrary[ind].push(parseFloat(parseFloat(radar_JSON.meters_to_first_gate)/scaleFactor + circleNo*(parseFloat(radar_JSON.meters_between_gates))/scaleFactor), angle);
+            pointsArrary[ind].push(pointOnCircle(parseFloat(parseFloat(radar_JSON.meters_to_first_gate)/scaleFactor + circleNo*(parseFloat(radar_JSON.meters_between_gates))/scaleFactor), angle));
         }
         ind++;
 
@@ -44,7 +44,7 @@ function renderJSON(radar_JSON)
 
 function pointOnCircle(r, angle)
 {
-    return {x: r*Math.cos(degrees_to_radians(angle)) + radarCenter.x, y: r*Math.sin(degrees_to_radians(angle))+radarCenter.x};
+    return {x: r*Math.cos(degrees_to_radians(angle)) + radarCenter.x, y: r*Math.sin(degrees_to_radians(angle))+radarCenter.y};
 }
 function degrees_to_radians(degrees)
 {
@@ -54,23 +54,42 @@ function degrees_to_radians(degrees)
 
 function createPolygons(two, pointsArray)
 {
+    console.log("CENTER");
+    console.log(radarCenter);
+    console.log(pointsArray);
+    for(var i=0; i<10; i++)
+    {
+        //console.log(i);
+        for(var j=0; j<pointsArray[i].length-2; j+=2)
+        {
+            createBox(two,  pointsArray[i][j].x,pointsArray[i][j].y,
+                            pointsArray[i][j+1].x,pointsArray[i][j+1].y,
+                            pointsArray[i+1][j+1].x,pointsArray[i+1][j+1].y,
+                            pointsArray[i+1][j].x,pointsArray[i][j].y,
+            )
 
 
 
-
-
-
-
-
-
+        }
+    }
 
 }
 
-createRect(p1,p2,p3,p4)
+function createBox(two, x1,y1,x2,y2,x3,y3,x4,y4)
 {
-    var rect = two.makeRectangle(50, 200, 100, 50);
-    rect.fill = 'rgb(0, 200, 255)';
-    rect.opacity = 0.75;
-    rect.noStroke();
+    //console.log(x1,y1,x2,y2,x3,y3,x4,y4);
+    var line = two.makeLine(x1,y1,x2,y2);
+    line.linewidth = 0.5;
+    line.stroke = "rgba(255, 0, 0)";
+    line = two.makeLine(x2,y2,x3,y3);
+    line.linewidth = 0.5;
+    line.stroke = "rgba(255, 0, 0)";
+    line = two.makeLine(x3,y3,x4,y4);
+    line.linewidth = 0.5;
+    line.stroke = "rgba(255, 0, 0)";
+    line = two.makeLine(x4,y4,x1,y1);
+    line.linewidth = 0.5;
+    line.stroke = "rgba(255, 0, 0)";
+
 
 }
