@@ -31,7 +31,7 @@ function renderJSON(radar_JSON) {
         ind++;
 
     }
-
+    console.log("CALCULATION DONE");
     createPolygons(two, pointsArrary);
 
 
@@ -48,12 +48,10 @@ function degrees_to_radians(degrees) {
 }
 
 function createPolygons(two, pointsArray) {
-    console.log("CENTER");
-    console.log(radarCenter);
-    console.log(pointsArray);
-    for (var i = 0; i < 5; i++) {
+
+    for (var i = 0; i < 20; i++) {
         console.log(i);
-        for (var j = 0; j < pointsArray[i].length - 2; j += 2) {
+        for (var j = 0; j < pointsArray[i].length - 1; j += 1) {
             createBox(two, pointsArray[i][j].x, pointsArray[i][j].y,
                 pointsArray[i][j + 1].x, pointsArray[i][j + 1].y,
                 pointsArray[i + 1][j + 1].x, pointsArray[i + 1][j + 1].y,
@@ -70,16 +68,16 @@ function createPolygons(two, pointsArray) {
 function createBox(two, x1, y1, x2, y2, x3, y3, x4, y4) {
     //console.log(x1,y1,x2,y2,x3,y3,x4,y4);
     var line = two.makeLine(x1, y1, x2, y2);
-    line.linewidth = 0.5;
+    line.linewidth = 0.1;
     line.stroke = "rgba(255, 0, 0)";
     line = two.makeLine(x2, y2, x3, y3);
-    line.linewidth = 0.5;
+    line.linewidth = 0.1;
     line.stroke = "rgba(255, 0, 0)";
     line = two.makeLine(x3, y3, x4, y4);
-    line.linewidth = 0.5;
+    line.linewidth = 0.1;
     line.stroke = "rgba(255, 0, 0)";
     line = two.makeLine(x4, y4, x1, y1);
-    line.linewidth = 0.5;
+    line.linewidth = 0.1;
     line.stroke = "rgba(255, 0, 0)";
 
 
