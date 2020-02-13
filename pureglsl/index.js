@@ -83,14 +83,6 @@ function renderBuffers(arrays) {
     }
 }
 
-// UI Events
-function onmousedown(event) {
-    var point = pixelInputToGLCoord(event, canvas);
-    // point.c = [Math.random(), Math.random(), Math.random(), 1.0];
-    point.c = [1,0,0, 1.0];
-    points.push(point);
-    draw();
-}
 
 
 function pixelInputToGLCoord(event, canvas) {
