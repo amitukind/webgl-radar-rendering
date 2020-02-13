@@ -27,9 +27,11 @@ function main() {
 
     initBuffers(gl);
 }
-
+var startTime, endTime;
 // draw!
 function draw() {
+    startTime = Date.now();
+
     var pointsArray = [], colorsArray = [];
     for (var i = 0; i < points.length; i++) {
         pointsArray.push(points[i].x);
@@ -56,6 +58,7 @@ function draw() {
     //gl.drawArrays(gl.TRIANGLE_FAN, 0, n);
 
     //gl.drawArrays(gl.TRIANGLE_STRIP, 0, n);
+  console.log(Date.now()-startTime+"ms");
 }
 
 // Create and set the buffers
@@ -170,13 +173,14 @@ function degrees_to_radians(degrees) {
 
 function createPolygons( pointsArray) {
 
-  for (var i = 0; i < 300; i++) {
+  for (var i = 0; i < 720; i++) {
     //console.log(i);
     for (var j = 0; j < pointsArray[i].length - 1; j += 1) {
+
       createBox( pointsArray[i][j].x, pointsArray[i][j].y,
           pointsArray[i][j + 1].x, pointsArray[i][j + 1].y,
-          pointsArray[i + 1][j + 1].x, pointsArray[i + 1][j + 1].y,
-          pointsArray[i + 1][j].x, pointsArray[i + 1][j].y,
+          pointsArray[i + 1 === 720 ? 0 :i+1][j + 1].x, pointsArray[i + 1 === 720 ? 0 :i+1][j + 1].y,
+          pointsArray[i + 1 === 720 ? 0 :i+1][j].x, pointsArray[i + 1 === 720 ? 0 :i+1][j].y,
       )
 
     }
