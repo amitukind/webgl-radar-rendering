@@ -49,7 +49,7 @@ function degrees_to_radians(degrees) {
 
 function createPolygons(two, pointsArray) {
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 2; i++) {
         console.log(i);
         for (var j = 0; j < pointsArray[i].length - 1; j += 1) {
             createBox(two, pointsArray[i][j].x, pointsArray[i][j].y,
