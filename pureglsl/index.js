@@ -1,5 +1,5 @@
 var canvas, gl, program, points = [];
-var colorCodes = ["#464A4C","#4B4E50","#515556","#55595C","#595E61","#5E6366","#646B6D","#6D7376","#767B7E","#7D8284","#818688","#878D8F","#8F9597","#979C9F","#9EA4A6","#A6ACAF","#AEB5B7","#B4BABB","#C1BFC8","#88E57E","#6CE85E","#68D75C","#62CA57","#5BBB50","#52A948","#4EA045","#46913D","#3E8237","#387331","#30662B","#3C622A","#5D7434","#849C39","#D1BE00","#FDE300","#FFE000","#FFDA00","#FFD400","#FFCC00","#FFBC00","#FFA100","#FF8A00","#FF8400","#FF7C00","#FF7400","#FF6C00","#FF6200","#FF5500","#FF4A00","#FF3A00","#FE1800","#FA0304","#F30105","#E80205","#DC0104","#D20004","#C7010B","#BD011D","#B40036","#A10091","#A000C5","#AB00D1","#B900D7","#C500DE","#D001E4","#DB03EA","#E506EF","#F008F5","#FF04FA","#33CEFE","#00EFFF","#00DAFF","#00CEFF","#00C7FF","#00C2FF","#00B8FF","#00ACFF","#0098FF","#158FF0","#BCB589","#FFCF68","#FFD68D","#FFDFA4","#FFE3B1","#FFE8BE"];
+var colorCodes = ["#464A4C", "#4B4E50", "#515556", "#55595C", "#595E61", "#5E6366", "#646B6D", "#6D7376", "#767B7E", "#7D8284", "#818688", "#878D8F", "#8F9597", "#979C9F", "#9EA4A6", "#A6ACAF", "#AEB5B7", "#B4BABB", "#C1BFC8", "#88E57E", "#6CE85E", "#68D75C", "#62CA57", "#5BBB50", "#52A948", "#4EA045", "#46913D", "#3E8237", "#387331", "#30662B", "#3C622A", "#5D7434", "#849C39", "#D1BE00", "#FDE300", "#FFE000", "#FFDA00", "#FFD400", "#FFCC00", "#FFBC00", "#FFA100", "#FF8A00", "#FF8400", "#FF7C00", "#FF7400", "#FF6C00", "#FF6200", "#FF5500", "#FF4A00", "#FF3A00", "#FE1800", "#FA0304", "#F30105", "#E80205", "#DC0104", "#D20004", "#C7010B", "#BD011D", "#B40036", "#A10091", "#A000C5", "#AB00D1", "#B900D7", "#C500DE", "#D001E4", "#DB03EA", "#E506EF", "#F008F5", "#FF04FA", "#33CEFE", "#00EFFF", "#00DAFF", "#00CEFF", "#00C7FF", "#00C2FF", "#00B8FF", "#00ACFF", "#0098FF", "#158FF0", "#BCB589", "#FFCF68", "#FFD68D", "#FFDFA4", "#FFE3B1", "#FFE8BE"];
 
 glUtils.SL.init({
     callback: function () {
@@ -43,6 +43,7 @@ function draw() {
         colorsArray.push(points[i].c[1]);
         colorsArray.push(points[i].c[2]);
         colorsArray.push(points[i].c[3]);
+        //debugger;
     }
     var arrays = [{name: 'aColor', array: colorsArray, size: 4},
         {name: 'aPosition', array: pointsArray, size: 2}];
@@ -99,7 +100,6 @@ function pixelInputToGLCoord(event, canvas) {
         rect = event.rect;
     x = ((x - rect.left) - midX) / midX;
     y = (midY - (y - rect.top)) / midY;
-
 
 
     return {x: x, y: y};
@@ -174,7 +174,7 @@ function degrees_to_radians(degrees) {
 
 function createPolygons(pointsArray, radar_JSON) {
 
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 720; i++) {
         //console.log(i);
         for (var j = 0; j < pointsArray[i].length - 1; j += 1) {
 
@@ -191,8 +191,8 @@ function createPolygons(pointsArray, radar_JSON) {
 }
 
 function createBox(x1, y1, x2, y2, x3, y3, x4, y4, color) {
-    var colorArr = hexToRGB(color,1);
-    console.log(colorArr);
+    var colorArr = hexToRGB(color, 1);
+    //console.log(colorArr);
 
     var point = pixelInputToGLCoord({clientX: x1, clientY: y1, rect: {top: -48, left: 0}}, {width: 4600, height: 4600});
     point.c = colorArr;
@@ -227,7 +227,7 @@ function hexToRGB(hex, alpha) {
         b = parseInt(hex.slice(5, 7), 16);
 
     if (alpha) {
-        return [r,g,b,alpha];
+        return [r, g, b, alpha];
         //return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
     } else {
         return "rgb(" + r + ", " + g + ", " + b + ")";
