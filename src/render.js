@@ -120,12 +120,12 @@ function GrenderLinked(ear, triangles, dim, minX, minY, invSize, pass) {
             if (!pass) {
                 GrenderLinked(filterPoints(ear), triangles, dim, minX, minY, invSize, 1);
 
-            // if this didn't work, try curing all small self-intersections locally
+                // if this didn't work, try curing all small self-intersections locally
             } else if (pass === 1) {
                 ear = cureLocalIntersections(filterPoints(ear), triangles, dim);
                 GrenderLinked(ear, triangles, dim, minX, minY, invSize, 2);
 
-            // as a last resort, try splitting the remaining polygon into two
+                // as a last resort, try splitting the remaining polygon into two
             } else if (pass === 2) {
                 splitGrender(ear, triangles, dim, minX, minY, invSize);
             }
@@ -341,7 +341,7 @@ function findHoleBridge(hole, outerNode) {
 
     do {
         if (hx >= p.x && p.x >= mx && hx !== p.x &&
-                pointInTriangle(hy < my ? hx : qx, hy, mx, my, hy < my ? qx : hx, hy, p.x, p.y)) {
+            pointInTriangle(hy < my ? hx : qx, hy, mx, my, hy < my ? qx : hx, hy, p.x, p.y)) {
 
             tan = Math.abs(hy - p.y) / (hx - p.x); // tangential
 
@@ -466,14 +466,14 @@ function getLeftmost(start) {
 // check if a point lies within a convex triangle
 function pointInTriangle(ax, ay, bx, by, cx, cy, px, py) {
     return (cx - px) * (ay - py) - (ax - px) * (cy - py) >= 0 &&
-           (ax - px) * (by - py) - (bx - px) * (ay - py) >= 0 &&
-           (bx - px) * (cy - py) - (cx - px) * (by - py) >= 0;
+        (ax - px) * (by - py) - (bx - px) * (ay - py) >= 0 &&
+        (bx - px) * (cy - py) - (cx - px) * (by - py) >= 0;
 }
 
 // check if a diagonal between two polygon nodes is valid (lies in polygon interior)
 function isValidDiagonal(a, b) {
     return a.next.i !== b.i && a.prev.i !== b.i && !intersectsPolygon(a, b) && // dones't intersect other edges
-           (locallyInside(a, b) && locallyInside(b, a) && middleInside(a, b) && // locally visible
+        (locallyInside(a, b) && locallyInside(b, a) && middleInside(a, b) && // locally visible
             (area(a.prev, a, b.prev) || area(a, b.prev, b)) || // does not create opposite-facing sectors
             equals(a, b) && area(a.prev, a, a.next) > 0 && area(b.prev, b, b.next) > 0); // special zero-length case
 }
@@ -519,7 +519,7 @@ function intersectsPolygon(a, b) {
     var p = a;
     do {
         if (p.i !== a.i && p.next.i !== a.i && p.i !== b.i && p.next.i !== b.i &&
-                intersects(p, p.next, a, b)) return true;
+            intersects(p, p.next, a, b)) return true;
         p = p.next;
     } while (p !== a);
 
@@ -541,7 +541,7 @@ function middleInside(a, b) {
         py = (a.y + b.y) / 2;
     do {
         if (((p.y > py) !== (p.next.y > py)) && p.next.y !== p.y &&
-                (px < (p.next.x - p.x) * (py - p.y) / (p.next.y - p.y) + p.x))
+            (px < (p.next.x - p.x) * (py - p.y) / (p.next.y - p.y) + p.x))
             inside = !inside;
         p = p.next;
     } while (p !== a);
@@ -661,7 +661,7 @@ function signedArea(data, start, end, dim) {
 // turn a polygon in a multi-dimensional array form (e.g. as in GeoJSON) into a form Grender accepts
 Grender.flatten = function (data) {
     var dim = data[0][0].length,
-        result = {vertices: [], holes: [], dimensions: dim},
+        result = { vertices: [], holes: [], dimensions: dim },
         holeIndex = 0;
 
     for (var i = 0; i < data.length; i++) {

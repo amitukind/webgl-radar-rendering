@@ -5,75 +5,16 @@
     <meta charset="utf-8">
     <title>Radar WebGL Rendering</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <script src="lib/three.js"></script>
+    <script src="lib/2webgl.js"></script>
+    <script src="src/webglinit.js"></script>
     <script src="src/decode.js"></script>
+    <script src="src/radar.js"></script>
 </head>
 
 <body>
     <script>
-
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-        var viewAngle = 45;
-        var nearClipping = 0.1;
-        var farClipping = 9999;
-        var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera(viewAngle, width / height, nearClipping, farClipping);
-        var renderer = new THREE.WebGLRenderer();
-        renderer.setSize(width, height);
-        document.body.appendChild(renderer.domElement);
-
-        
-
-        var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-        var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 });
-        var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-        var coneGeometry = new THREE.ConeGeometry(0.5, 1, 4);
-        var coneMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
-        var cone = new THREE.Mesh(coneGeometry, coneMaterial);
-        var sphereGeometry = new THREE.SphereGeometry(0.5, 8, 8);
-        var sphereMaterial = new THREE.MeshLambertMaterial({ color: 0x0000ff });
-        var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-
-
-
-        cube.position.x = -2
-        cube.position.z = -5;
-        cone.position.z = -5;
-        sphere.position.z = -5;
-        sphere.position.x = 2;
-        cube.position.z = -5;
-        scene.add(cube);
-        scene.add(cone);
-        scene.add(sphere);
-
-
-        var light = new THREE.PointLight(0xFFFFFF);
-        light.position.x = 0;
-        light.position.y = 10;
-        light.position.z = 0;
-        scene.add(light);
-
-        var lightAngle = 0;
-        
-        function animate() {
-            lightAngle += 5;
-            if (lightAngle > 360) { lightAngle = 0; };
-            light.position.x = 5 * Math.cos(lightAngle * Math.PI / 180);
-            light.position.z = 5 * Math.sin(lightAngle * Math.PI / 180);
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-        animate();
-
-
-
+        init();
     </script>
-
 </body>
-<script>
-
-
-</script>
 
 </html>

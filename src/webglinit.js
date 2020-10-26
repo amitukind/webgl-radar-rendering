@@ -1,8 +1,10 @@
-
-function webGLinit()
-{
+function webGLinit() {
     var elem = document.body;
-    var params = { width: 285, height: 200, type: Two.Types.webgl };
+    var params = {
+        width: 285,
+        height: 200,
+        type: Two.Types.webgl
+    };
     var two = new Two(params).appendTo(elem);
 
     var circle = two.makeCircle(72, 100, 50);

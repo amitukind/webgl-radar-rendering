@@ -1,7 +1,7 @@
 function renderJSON(radar_JSON) {
-    console.log("I have got data to render");
-    console.log(radar_JSON);
-    console.log(radar_JSON.meters_to_first_gate);
+    //console.log("I have got data to render");
+    //console.log(radar_JSON);
+    //console.log(radar_JSON.meters_to_first_gate);
     //radar_JSON.radius = 3000;
     var scaleFactor = 100;
 
@@ -31,7 +31,7 @@ function renderJSON(radar_JSON) {
         ind++;
 
     }
-    console.log("CALCULATION DONE");
+    //console.log("CALCULATION DONE");
     createPolygons(two, pointsArrary);
 
 
@@ -49,8 +49,8 @@ function degrees_to_radians(degrees) {
 
 function createPolygons(two, pointsArray) {
 
-    for (var i = 0; i < 2; i++) {
-        console.log(i);
+    for (var i = 0; i < 5; i++) {
+        //console.log(i);
         for (var j = 0; j < pointsArray[i].length - 1; j += 1) {
             createBox(two, pointsArray[i][j].x, pointsArray[i][j].y,
                 pointsArray[i][j + 1].x, pointsArray[i][j + 1].y,
